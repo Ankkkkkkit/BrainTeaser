@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Brain Teaser Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        .teaser { font-size: 24px; margin-bottom: 20px; }
+        .feedback { font-size: 18px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+<h1>Brain Teaser Quiz</h1>
+<form action="#" th:action="@{/takeQuiz/submit}" method="post">
+    <div th:each="teaser, iter : ${teasers}">
+        <div class="teaser" th:text="${teaser.key}"></div>
+        <input type="text" name="answer_${teaser.key}" placeholder="Enter your answer" required />
+    </div>
+    <button type="submit">Submit</button>
+</form>
+<div class="feedback" th:if="${feedback}" th:text="${feedback}"></div>
+<div class="score" th:if="${score}">
+    <p>Your score: <span th:text="${score}"></span> out of <span th:text="${totalQuestions}"></span></p>
+</div>
+</body>
+</html>
